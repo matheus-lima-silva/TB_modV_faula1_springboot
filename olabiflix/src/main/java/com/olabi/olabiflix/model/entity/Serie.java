@@ -1,11 +1,13 @@
 package com.olabi.olabiflix.model.entity;
 
+import com.olabi.olabiflix.model.value.Ratings;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,21 +24,24 @@ public class Serie {
     private String title;
 
     private String totalSeasons;
-    private ArrayList <String> genre;
-    private ArrayList <String> writers;
+    private List <String> genre;
+    private List <String> writers;
     private String poster;
-    private ArrayList <String> actors;
+    private List <String> actors;
     //ratings
+    @Embedded
+    private Ratings ratings;
 
     protected Serie() {}
 
-    public Serie(String title, String totalSeasons, ArrayList<String> genre, ArrayList<String> writers, String poster, ArrayList<String>actors) {
+    public Serie(String title, String totalSeasons, List<String> genre, List<String> writers, String poster, List<String>actors, Ratings ratings) {
         this.title = title;
         this.totalSeasons = totalSeasons;
         this.genre = genre;
         this.writers = writers;
         this.poster = poster;
         this.actors = actors;
+        this.ratings = ratings;
     }
 
     public UUID getId() {
@@ -63,19 +68,19 @@ public class Serie {
         this.totalSeasons = totalSeasons;
     }
 
-    public ArrayList<String> getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(ArrayList<String> genre) {
+    public void setGenre(List<String> genre) {
         this.genre = genre;
     }
 
-    public ArrayList<String> getWriters() {
+    public List<String> getWriters() {
         return writers;
     }
 
-    public void setWriters(ArrayList<String> writers) {
+    public void setWriters(List<String> writers) {
         this.writers = writers;
     }
 
@@ -87,27 +92,21 @@ public class Serie {
         this.poster = poster;
     }
 
-    public ArrayList<String> getActors() {
+    public List<String> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    public void setActors(List<String> actors) {
         this.actors = actors;
     }
 
-    @Override
-    public String toString() {
-        return "Filme{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", releaseYear='" + totalSeasons + '\'' +
-                ", genre='" + genre + '\'' +
-                ", writers='" + writers + '\'' +
-                ", actors='" + actors + '\'' +
-                ", poster='" + poster + '\'' +
-                ", actors='" + actors + '\'' +
-                '}';
-
+    public Ratings getRatings() {
+        return ratings;
     }
+
+    public void setRatings(Ratings ratings) {
+        this.ratings = ratings;
+    }
+
 
 }
